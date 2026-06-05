@@ -5,7 +5,7 @@
 **Batch:** CS25-C / SE25  
 **Instructor:** Ms. Saima Yasmeen  
 **Submission Date:** 15-06-2026  
-**Total Marks:** 10 (+2 Bonus)
+**Total Marks:** 8 (+2 Bonus)
 
 ---
 
