@@ -1,0 +1,357 @@
+================================================================================
+ENHANCED ENTITY-RELATIONSHIP DIAGRAM (EERD)
+Library Management System - SQL Server 2019
+================================================================================
+
+VISUAL REPRESENTATION
+================================================================================
+
+┌─────────────────────┐
+│    CATEGORIES       │
+├─────────────────────┤
+│ PK: CategoryID      │
+│ • CategoryName (U)  │  1
+│ • Description       │───────────────────┐
+│ • CreatedDate       │                   │
+└─────────────────────┘                   │ 1:M
+                                          │
+                                          ├────────┐
+                                          ↓        │
+                                    ┌──────────────────────┐
+                                    │     BOOKS            │
+                                    ├──────────────────────┤
+                                    │ PK: BookID           │
+                                    │ FK: CategoryID       │
+                                    │ • ISBN (U)           │
+                                    │ • Title              │
+                                    │ • PublishYear        │
+                                    │ • TotalCopies        │
+                                    │ • AvailableCopies    │
+                                    │ • PublisherName      │
+                                    │ • Description        │
+                                    │ • CreatedDate        │
+                                    └──────────────────────┘
+                                          ↑    ↓
+                                          │    │ M:M
+                                          │    │ (through
+                                    ┌─────┴────┴──────────┐
+                                    │  BOOK_AUTHORS        │
+                                    ├──────────────────────┤
+                                    │ PK: BookAuthorID     │
+                                    │ FK: BookID           │
+                                    │ FK: AuthorID         │
+                                    │ • AuthorSequence     │
+                                    │ UNIQUE(BookID, Auth) │
+                                    └─────┬────┬──────────┘
+                                          │    │
+                                          │    └─ Associative Entity)
+                                    ┌─────┘
+                                    │
+┌─────────────────────┐             │
+│    AUTHORS          │             │
+├─────────────────────┤             │
+│ PK: AuthorID        │ M:M         │
+│ • FirstName         │────────────→┤
+│ • LastName          │
+│ • Email             │
+│ • Phone             │
+│ • DateOfBirth       │
+│ • Nationality       │
+│ • CreatedDate       │
+└─────────────────────┘
+
+                    ┌────────────────────────────────────┐
+                    │         BORROWING                  │
+                    ├────────────────────────────────────┤
+                    │ PK: BorrowingID                    │
+                    │ FK: MemberID (NOT NULL)            │
+                    │ FK: BookID (NOT NULL)              │
+                    │ • BorrowDate (NOT NULL)            │
+                    │ • DueDate (NOT NULL)               │
+                    │ • ReturnDate (NULL)                │
+                    │ • Status                           │
+                    │ • CreatedDate                      │
+                    │ [WEAK ENTITY]                      │
+                    └───────────┬────────────────────────┘
+                                │
+                    1:M         │
+    ┌─────────────────────┐     │
+    │    MEMBERS          │     │
+    ├─────────────────────┤     │
+    │ PK: MemberID        │     │
+    │ • MembershipNum (U) │←────┘
+    │ • FirstName         │
+    │ • LastName          │
+    │ • Email (U)         │
+    │ • Phone             │
+    │ • Address           │
+    │ • City              │
+    │ • Country           │
+    │ • PostalCode        │
+    │ • DateOfBirth       │
+    │ • MembershipDate    │
+    │ • ExpiryDate        │
+    │ • Status (Active/)  │
+    │   Inactive/         │
+    │   Suspended)        │
+    │ • CreatedDate       │
+    └─────────────┬───────┘
+                  │
+                  │ 1:M
+                  ↓
+    ┌─────────────────────────────┐
+    │        FINES                │
+    ├─────────────────────────────┤
+    │ PK: FineID                  │
+    │ FK: BorrowingID (NOT NULL)  │
+    │ FK: MemberID (NOT NULL)     │
+    │ • FineAmount (>=0)          │
+    │ • FineDate                  │
+    │ • DaysOverdue               │
+    │ • PaymentStatus (Paid/      │
+    │   Unpaid/Partial)           │
+    │ • PaymentDate               │
+    │ • CreatedDate               │
+    └─────────────────────────────┘
+
+                  │
+                  │ 1:M
+                  ↓
+    ┌─────────────────────────────┐
+    │  MEMBERSTATUSAUDIT          │
+    ├─────────────────────────────┤
+    │ PK: AuditID                 │
+    │ FK: MemberID (NOT NULL)     │
+    │ • OldStatus                 │
+    │ • NewStatus                 │
+    │ • ChangedDate               │
+    │ • ChangeReason              │
+    │ [AUDIT LOG ENTITY]          │
+    └─────────────────────────────┘
+
+================================================================================
+RELATIONSHIP DEFINITIONS
+================================================================================
+
+RELATIONSHIP 1: Categories → Books
+─────────────────────────────────
+
+Type: 1:M (One-to-Many)
+Participation: 
+  - Books: TOTAL (every book must belong to a category)
+  - Categories: PARTIAL (a category may have no books)
+Cardinality: 1 (Categories) → M (Books)
+Action: ON DELETE CASCADE (delete category removes all its books)
+SQL: FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+
+RELATIONSHIP 2: Authors ←→ Books (M:M)
+──────────────────────────────────────
+
+Type: M:M (Many-to-Many)
+Via: Book_Authors (Associative Entity)
+Participation:
+  - Authors: TOTAL (every author must write at least one book)
+  - Books: TOTAL (every book must have at least one author)
+Cardinality: M (Authors) ←→ M (Books)
+Additional Attribute: AuthorSequence (indicates author order)
+Unique Constraint: UNIQUE(BookID, AuthorID) - no duplicate combinations
+Action: ON DELETE CASCADE
+
+RELATIONSHIP 3: Members → Borrowing
+───────────────────────────────────
+
+Type: 1:M (One-to-Many)
+Participation:
+  - Borrowing: TOTAL (every borrowing record belongs to a member)
+  - Members: PARTIAL (a member may not have any borrowing records)
+Cardinality: 1 (Members) → M (Borrowing)
+Action: ON DELETE CASCADE
+SQL: FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+
+RELATIONSHIP 4: Books → Borrowing
+──────────────────────────────────
+
+Type: 1:M (One-to-Many)
+Participation:
+  - Borrowing: TOTAL (every borrowing references a book)
+  - Books: PARTIAL (a book may never be borrowed)
+Cardinality: 1 (Books) → M (Borrowing)
+Action: ON DELETE CASCADE
+SQL: FOREIGN KEY (BookID) REFERENCES Books(BookID)
+
+RELATIONSHIP 5: Borrowing → Fines
+──────────────────────────────────
+
+Type: 1:M (One-to-Many)
+Participation:
+  - Fines: TOTAL (every fine relates to a borrowing)
+  - Borrowing: PARTIAL (not all borrowings result in fines)
+Cardinality: 1 (Borrowing) → M (Fines)
+Action: ON DELETE NO ACTION (preserve fine history)
+SQL: FOREIGN KEY (BorrowingID) REFERENCES Borrowing(BorrowingID)
+
+RELATIONSHIP 6: Members → Fines
+────────────────────────────────
+
+Type: 1:M (One-to-Many)
+Participation:
+  - Fines: TOTAL (every fine belongs to a member)
+  - Members: PARTIAL (a member may have no fines)
+Cardinality: 1 (Members) → M (Fines)
+Action: ON DELETE NO ACTION
+SQL: FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+
+RELATIONSHIP 7: Members → MemberStatusAudit
+─────────────────────────────────────────────
+
+Type: 1:M (One-to-Many)
+Participation: TOTAL (every audit record belongs to a member)
+Cardinality: 1 (Members) → M (MemberStatusAudit)
+Action: ON DELETE CASCADE
+SQL: FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+
+================================================================================
+ENTITY CLASSIFICATIONS
+================================================================================
+
+STRONG ENTITIES:
+  • Categories - Independent existence
+  • Authors - Independent existence
+  • Books - Independent existence (has composite key with category)
+  • Members - Independent existence
+
+WEAK ENTITIES:
+  • Borrowing - Depends on Members and Books for meaning
+  • Fines - Depends on Borrowing and Members
+  • MemberStatusAudit - Depends on Members
+
+ASSOCIATIVE ENTITIES:
+  • Book_Authors - Implements M:M relationship between Books and Authors
+
+ENTITIES WITH SPECIALIZATION:
+  None (no inheritance hierarchies implemented)
+
+================================================================================
+KEY CONSTRAINTS
+================================================================================
+
+PRIMARY KEYS (PK):
+  • Categories.CategoryID - Surrogate key
+  • Authors.AuthorID - Surrogate key
+  • Books.BookID - Surrogate key
+  • Book_Authors.BookAuthorID - Surrogate key
+  • Members.MemberID - Surrogate key
+  • Borrowing.BorrowingID - Surrogate key
+  • Fines.FineID - Surrogate key
+  • MemberStatusAudit.AuditID - Surrogate key
+
+FOREIGN KEYS (FK):
+  • Books.CategoryID → Categories.CategoryID
+  • Book_Authors.BookID → Books.BookID
+  • Book_Authors.AuthorID → Authors.AuthorID
+  • Borrowing.MemberID → Members.MemberID
+  • Borrowing.BookID → Books.BookID
+  • Fines.BorrowingID → Borrowing.BorrowingID
+  • Fines.MemberID → Members.MemberID
+  • MemberStatusAudit.MemberID → Members.MemberID
+
+UNIQUE CONSTRAINTS:
+  • Categories.CategoryName - Cannot duplicate category names
+  • Books.ISBN - International Standard Book Number must be unique
+  • Members.MembershipNumber - Each member has unique membership number
+  • Members.Email - Each member has unique email
+  • Book_Authors.(BookID, AuthorID) - No duplicate book-author pairs
+
+================================================================================
+NORMALIZATION LEVEL
+================================================================================
+
+Database is in BCNF (Boyce-Codd Normal Form):
+
+✓ 1NF (First Normal Form):
+  - All attributes are atomic (not multivalued)
+  - No repeating groups
+  - Each cell contains single value
+
+✓ 2NF (Second Normal Form):
+  - In 1NF
+  - No partial dependencies
+  - All non-key attributes depend on entire primary key
+
+✓ 3NF (Third Normal Form):
+  - In 2NF
+  - No transitive dependencies
+  - Non-key attributes depend only on primary key
+
+✓ BCNF (Boyce-Codd Normal Form):
+  - In 3NF
+  - Every determinant is a candidate key
+  - No anomalies
+
+RESULT: No insertion, update, or deletion anomalies
+
+================================================================================
+TRIGGER AND VIEW SUPPORT
+================================================================================
+
+TRIGGERS IMPLEMENTED:
+  1. tr_UpdateBookAvailabilityOnBorrow - Decreases copies on borrow
+  2. tr_UpdateBookAvailabilityOnReturn - Increases copies on return
+  3. tr_GenerateOverdueFine - Creates fine records for overdue books
+  4. tr_PreventOverbooking - Prevents borrowing unavailable books
+  5. tr_AuditMemberStatusChange - Logs member status changes
+  6. tr_PreventRecentBookDeletion - Protects recently borrowed books
+
+VIEWS IMPLEMENTED:
+  1. vw_MemberBorrowingActivity - Member activity dashboard
+  2. vw_BookAvailabilityReport - Book popularity and availability
+  3. vw_OverdueBooks - Overdue items with fine calculations
+  4. vw_FineCollectionSummary - Fine amounts by member
+
+================================================================================
+CARDINALITY NOTATION LEGEND
+================================================================================
+
+1:1 - One-to-One
+     Each entity in set A relates to at most one entity in set B
+     Each entity in set B relates to at most one entity in set A
+
+1:M - One-to-Many
+     Each entity in set A relates to many entities in set B
+     Each entity in set B relates to at most one entity in set A
+
+M:M - Many-to-Many
+     Each entity in set A relates to many entities in set B
+     Each entity in set B relates to many entities in set A
+     Requires associative entity
+
+─── - Partial Participation (optional)
+     Not all entities in set must participate in relationship
+
+─── - Total Participation (mandatory)
+     All entities in set must participate in relationship
+
+================================================================================
+SUMMARY
+================================================================================
+
+Total Entities: 8
+  • Strong Entities: 4
+  • Weak Entities: 3
+  • Associative Entities: 1
+
+Total Relationships: 7
+  • 1:M Relationships: 6
+  • M:M Relationships: 1
+
+Total Primary Keys: 8
+Total Foreign Keys: 8
+Total Unique Constraints: 5
+Total Check Constraints: 20+
+
+Normalization: BCNF (No anomalies)
+Referential Integrity: CASCADE or NO ACTION
+
+Status: ✅ READY FOR IMPLEMENTATION
+
+================================================================================
