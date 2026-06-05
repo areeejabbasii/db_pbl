@@ -1,16 +1,5 @@
 # Library Management System - Database Project
 
-**Course:** CS160 Database Systems  
-**Semester:** 2  
-**Batch:** CS25-C / SE25  
-**Instructor:** Ms. Saima Yasmeen  
-**Student Name:** [Your Name]  
-**Roll #:** [Your Roll Number]  
-**Total Marks:** 8 (+2 Bonus)  
-**Deadline:** 15-06-2026
-
----
-
 ## Project Overview
 
 A comprehensive Library Management System built with SQL Server 2019, featuring:
@@ -53,13 +42,5 @@ python app.py
 - **Borrowing** - Loan transactions
 - **Fines** - Overdue penalties
 
----
 
-## Evaluation Areas
-
-- EERD & Conceptual Modeling (30%)
-- SQL Layout Implementation (30%)
-- Query & Scripting Complexity (30%)
-- Git Hygiene & Report Format (10%)
-- Application Layer Bonus (+2 Marks)
 
