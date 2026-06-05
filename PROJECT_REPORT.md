@@ -435,7 +435,7 @@ The Library Management System project successfully demonstrates:
 
 ---
 
-**Prepared by:** Areej Safeer, Amnah Qureshi, Laiba, Abbas Noor Ul Huda  
+**Prepared by:** Areej Safeer  
 **Date:** 15-06-2026  
 **Version:** 1.0
 
