@@ -11,10 +11,7 @@
 
 ## STUDENT INFORMATION
 
-- **Name:** Areej Safeer (F25605302)
-- **Name:** Amnah Qureshi (67)
-- **Name:** Laiba (06)
-- **Name:** Abbas Noor Ul Huda (48)
+- **Name:** Areej Safeer (F25605302), Amnah Qureshi (67), Laiba (06), Abbas Noor Ul Huda (48)
 - **Submission Date:** 15-06-2026
 - **Marks Allocation:** 8 (+2 Bonus)
 
