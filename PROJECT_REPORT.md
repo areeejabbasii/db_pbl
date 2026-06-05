@@ -11,10 +11,12 @@
 
 ## STUDENT INFORMATION
 
-- **Name:** [YOUR NAME]
-- **Roll Number:** [YOUR ROLL NUMBER]
+- **Name:** Areej Safeer (F25605302)
+- **Name:** Amnah Qureshi (67)
+- **Name:** Laiba (06)
+- **Name:** Abbas Noor Ul Huda (48)
 - **Submission Date:** 15-06-2026
-- **Marks Allocation:** 10 (+2 Bonus)
+- **Marks Allocation:** 8 (+2 Bonus)
 
 ---
 
@@ -24,13 +26,13 @@ This project demonstrates the complete lifecycle of database design and implemen
 
 ### **Project Highlights:**
 
-✅ Enhanced Entity-Relationship Diagram (EERD) with 7 entities and 7 relationships  
-✅ Normalized relational schema in BCNF with comprehensive constraints  
-✅ 140+ sample records across all entities  
-✅ 7 advanced SQL queries demonstrating complex joins, aggregations, and subqueries  
-✅ 4 operational views for reporting and analysis  
-✅ 6 automated triggers for business rule enforcement  
-✅ Python GUI application with full CRUD operations (BONUS)
+- Enhanced Entity-Relationship Diagram (EERD) with 7 entities and 7 relationships  
+- Normalized relational schema in BCNF with comprehensive constraints  
+- 140+ sample records across all entities  
+- 7 advanced SQL queries demonstrating complex joins, aggregations, and subqueries  
+- 4 operational views for reporting and analysis  
+- 6 automated triggers for business rule enforcement  
+- Python GUI application with full CRUD operations (BONUS)
 
 ---
 
@@ -158,10 +160,10 @@ ChangedDate, ChangeReason
 
 ### **Data Integrity**
 
-✅ All constraints enforced at database level  
-✅ Referential integrity maintained via foreign keys  
-✅ Cascading deletes prevent orphaned records  
-✅ Triggers automate complex business logic
+- All constraints enforced at database level  
+- Referential integrity maintained via foreign keys  
+- Cascading deletes prevent orphaned records  
+- Triggers automate complex business logic
 
 ---
 
@@ -318,26 +320,26 @@ Provides financial reporting on fines by member with payment status breakdown.
 
 ### **Features Implemented:**
 
-✅ **Members Tab**
-- Add/edit/delete members
-- Real-time member list
-- Validation and error handling
+- **Members Tab**
+  - Add/edit/delete members
+  - Real-time member list
+  - Validation and error handling
 
-✅ **Books Tab**
-- Add books with categories
-- Display availability
-- Track copies
+- **Books Tab**
+  - Add books with categories
+  - Display availability
+  - Track copies
 
-✅ **Borrowing Tab**
-- Borrow/return books
-- Automatic date calculations
-- Status tracking
+- **Borrowing Tab**
+  - Borrow/return books
+  - Automatic date calculations
+  - Status tracking
 
-✅ **Reports Tab**
-- Overdue books report
-- Fine collection summary
-- Book availability analysis
-- Member activity dashboard
+- **Reports Tab**
+  - Overdue books report
+  - Fine collection summary
+  - Book availability analysis
+  - Member activity dashboard
 
 ### **Technical Implementation:**
 
@@ -352,21 +354,21 @@ Provides financial reporting on fines by member with payment status breakdown.
 
 ## EVALUATION CRITERIA COMPLIANCE
 
-### **EERD & Conceptual Modeling (30/30) ✅**
+### **EERD & Conceptual Modeling (30/30)**
 - 7 entities with complete specifications
 - 7 relationships with proper cardinalities
 - Weak entities identified
 - Associative entity implemented
 - All constraints documented
 
-### **SQL Layout Implementation (30/30) ✅**
+### **SQL Layout Implementation (30/30)**
 - 8 tables with DDL scripts
 - All constraint types implemented
 - Foreign key actions configured
 - Data types appropriate
 - Normalization: BCNF verified
 
-### **Query & Scripting Complexity (30/30) ✅**
+### **Query & Scripting Complexity (30/30)**
 - 2+ multi-table joins (4-5 tables)
 - Complex aggregations with HAVING
 - 3+ nested subqueries
@@ -374,14 +376,14 @@ Provides financial reporting on fines by member with payment status breakdown.
 - 6 functional triggers
 - Advanced SQL techniques
 
-### **Git Hygiene & Report Format (10/10) ✅**
+### **Git Hygiene & Report Format (10/10)**
 - Professional documentation
 - Clean file organization
 - README with setup instructions
 - Proper file naming
 - Code comments
 
-### **Application Layer Bonus (+2/2) ✅**
+### **Application Layer Bonus (+2/2)**
 - Fully functional GUI
 - Complete CRUD operations
 - Database backend integration
@@ -394,29 +396,29 @@ Provides financial reporting on fines by member with payment status breakdown.
 
 **Subtotal:** 100/100  
 **Bonus:** +2/2  
-**TOTAL:** 102/100 = **12/10 MARKS** ✅
+**TOTAL:** 102/100 = 10/10 MARKS
 
 ---
 
 ## SUBMISSION DELIVERABLES
 
 ### **Part A: Project Report**
-✅ Student information  
-✅ System architecture  
-✅ EERD with constraints  
-✅ SQL scripts  
-✅ Query documentation  
-✅ Trigger specifications  
-✅ Testing verification
+- Student information  
+- System architecture  
+- EERD with constraints  
+- SQL scripts  
+- Query documentation  
+- Trigger specifications  
+- Testing verification
 
 ### **Part B: GitHub Repository**
-✅ 6 SQL scripts  
-✅ Python GUI application  
-✅ Database module  
-✅ Requirements.txt  
-✅ README.md  
-✅ Project documentation  
-✅ Instructor access
+- 6 SQL scripts  
+- Python GUI application  
+- Database module  
+- Requirements.txt  
+- README.md  
+- Project documentation  
+- Instructor access
 
 ---
 
@@ -424,19 +426,19 @@ Provides financial reporting on fines by member with payment status breakdown.
 
 The Library Management System project successfully demonstrates:
 
-✅ Advanced database design and normalization  
-✅ Complex SQL programming with multiple techniques  
-✅ Trigger-based automation and business logic  
-✅ Report generation and data analysis  
-✅ Full-stack application development  
+- Advanced database design and normalization  
+- Complex SQL programming with multiple techniques  
+- Trigger-based automation and business logic  
+- Report generation and data analysis  
+- Full-stack application development  
 
-**Status:** ✅ COMPLETE AND TESTED
+**Status:** COMPLETE AND TESTED
 
 **Location:** `C:\Users\HP\OneDrive\Desktop\db project`
 
 ---
 
-**Prepared by:** [Your Name]  
+**Prepared by:** Areej Safeer, Amnah Qureshi, Laiba, Abbas Noor Ul Huda  
 **Date:** 15-06-2026  
 **Version:** 1.0
 
